@@ -1,12 +1,12 @@
 # express-async-middleware-wrapper
 
-Express.js wrapper for async middleware to handle errors
+Wrapper for Express.js async middleware to handle rejected promises and synchronous exceptions.
 
 # Usage
 
 ```typescript
 import { Request, Response, Router } from 'express';
-import wrapper from '@myrotvorets/express-async-wrapper-middleware';
+import wrapper from '@myrotvorets/express-async-middleware-wrapper';
 
 async function handler(req: Request, res: Response): Promise<void> {
     const someAsyncResult = await someAsyncAction();
