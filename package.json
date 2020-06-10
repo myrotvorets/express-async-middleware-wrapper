@@ -1,7 +1,7 @@
 {
-  "name": "@myrotvorets/express-async-wrapper-middleware",
+  "name": "@myrotvorets/express-async-middleware-wrapper",
   "version": "1.0.0",
-  "description": "Middleware to wrap async route handlers and handle errors",
+  "description": "Wrapper for Express.js async middleware to handle rejected promises and synchronous exceptions",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",

@@ -1,10 +1,10 @@
 import request from 'supertest';
 import express, { Request, RequestHandler, Response, NextFunction } from 'express';
-import middleware from '..';
+import wrapper from '..';
 
 function buildServer(fn: RequestHandler): express.Application {
     const server = express();
-    server.use(middleware(fn));
+    server.use(wrapper(fn));
     server.use((req: Request, res: Response): unknown => res.json({ status: 200 }));
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     server.use((err: Error | null, req: Request, res: Response, next: NextFunction): unknown =>
