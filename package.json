@@ -19,7 +19,7 @@
   "author": "Myrotvorets <support@myrotvorets.center> (https://myrotvorets.center/)",
   "license": "MIT",
   "devDependencies": {
-    "@types/express": "^4.17.7",
+    "@types/express": "^4.17.8",
     "@types/jest": "^26.0.10",
     "@types/supertest": "^2.0.10",
     "@typescript-eslint/eslint-plugin": "^3.10.1",
