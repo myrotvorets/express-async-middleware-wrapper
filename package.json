@@ -5,8 +5,8 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
-    "lint": "eslint --no-eslintrc -c .eslintrc.json .",
-    "lint:fix": "eslint --no-eslintrc -c .eslintrc.json --fix .",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
     "test": "jest"
   },
   "files": [
@@ -19,13 +19,13 @@
   "author": "Myrotvorets <support@myrotvorets.center> (https://myrotvorets.center/)",
   "license": "MIT",
   "devDependencies": {
+    "@myrotvorets/eslint-config-myrotvorets-ts": "^1.0.2",
     "@types/express": "^4.17.8",
     "@types/jest": "^26.0.14",
     "@types/supertest": "^2.0.10",
     "@typescript-eslint/eslint-plugin": "^4.2.0",
-    "@typescript-eslint/parser": "^4.2.0",
     "eslint": "^7.9.0",
-    "eslint-config-prettier": "^6.12.0",
+    "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-prettier": "^3.1.4",
     "express": "^4.17.1",
     "jest": "^26.4.2",
