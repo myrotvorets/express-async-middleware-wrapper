@@ -1,5 +1,6 @@
+/* eslint-disable require-await */
 import request from 'supertest';
-import express, { Request, RequestHandler, Response, NextFunction } from 'express';
+import express, { NextFunction, Request, RequestHandler, Response } from 'express';
 import wrapper from '..';
 
 function buildServer(fn: RequestHandler): express.Application {
@@ -52,7 +53,7 @@ describe('Middleware', (): void => {
         return request(server)
             .get('/')
             .expect(500)
-            .expect(/Rejecting promise/);
+            .expect(/Rejecting promise/u);
     });
 
     it('should be able to handle throwingHandler()', (): Promise<unknown> => {
@@ -60,6 +61,6 @@ describe('Middleware', (): void => {
         return request(server)
             .get('/')
             .expect(500)
-            .expect(/All fired up/);
+            .expect(/All fired up/u);
     });
 });
