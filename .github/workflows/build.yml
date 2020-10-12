@@ -26,6 +26,3 @@ jobs:
       run: npm cit
       env:
         NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-
-    - name: Build
-      run: npm run build
