@@ -1,4 +1,3 @@
-/* eslint-disable require-await */
 import request from 'supertest';
 import express, { NextFunction, Request, RequestHandler, Response } from 'express';
 import wrapper from '..';
@@ -18,20 +17,20 @@ function syncHandler(req: Request, res: Response): void {
     res.status(204).send();
 }
 
-async function normalHandler(req: Request, res: Response): Promise<void> {
+function normalHandler(req: Request, res: Response): Promise<void> {
     return new Promise<void>((resolve): void => {
         res.status(200).json({});
         resolve();
     });
 }
 
-async function rejectingHandler(): Promise<void> {
+function rejectingHandler(): Promise<void> {
     return new Promise<void>((resolve, reject): void => {
         reject(new Error('Rejecting promise'));
     });
 }
 
-async function throwingHandler(): Promise<void> {
+function throwingHandler(): Promise<void> {
     return new Promise<void>((): void => {
         throw new Error('All fired up');
     });
