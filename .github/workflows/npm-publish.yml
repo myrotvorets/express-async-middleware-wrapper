@@ -6,17 +6,26 @@ on:
       - '*'
 
 jobs:
-  publish-gpr:
+  publish:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2.1.2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+
+      - name: Run clean install
+        run: npm ci
+
+      - name: Set up Node.js and configure it for GitHub package registry
+        uses: actions/setup-node@v1
         with:
           node-version: 12
           registry-url: https://npm.pkg.github.com/
-      - run: npm cit
+
+      - name: Publish to GitHub package registry
+        run: npm publish
         env:
-          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-      - run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
