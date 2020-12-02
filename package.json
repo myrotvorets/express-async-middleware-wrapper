@@ -23,7 +23,7 @@
   "devDependencies": {
     "@myrotvorets/eslint-config-myrotvorets-ts": "^2.0.1",
     "@types/express": "^4.17.9",
-    "@types/jest": "^26.0.14",
+    "@types/jest": "^26.0.16",
     "@types/supertest": "^2.0.10",
     "@typescript-eslint/eslint-plugin": "^4.8.2",
     "eslint": "^7.14.0",
