@@ -1,6 +1,12 @@
 # express-async-middleware-wrapper
 
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=myrotvorets_express-async-middleware-wrapper&metric=alert_status)](https://sonarcloud.io/dashboard?id=myrotvorets_express-async-middleware-wrapper)
+![Build and Test CI](https://github.com/myrotvorets/express-async-middleware-wrapper/workflows/Build%20and%20Test%20CI/badge.svg)
+[![codebeat badge](https://codebeat.co/badges/8e9431d0-517a-4509-9e3f-5ce985079bda)](https://codebeat.co/projects/github-com-myrotvorets-express-async-middleware-wrapper-master)
+
 Wrapper for Express.js async middleware to handle rejected promises and synchronous exceptions.
+
+This library is similar to [express-async-handler](https://www.npmjs.com/package/express-async-handler) but is written in TypeScript, and its typings handle more cases than those of `express-async-handler` (for example, it can deal with the changes introduced in [DefinitelyTyped/DefinitelyTyped#49677](https://github.com/DefinitelyTyped/DefinitelyTyped/pull/49677))
 
 # Usage
 
