@@ -1,8 +1,8 @@
 import request from 'supertest';
 import express, { NextFunction, Request, RequestHandler, Response } from 'express';
-import wrapper from '..';
+import wrapper, { AsyncRequestHandler } from '../lib';
 
-function buildServer(fn: RequestHandler): express.Application {
+function buildServer(fn: RequestHandler | AsyncRequestHandler): express.Application {
     const server = express();
     server.use(wrapper(fn));
     server.use((req: Request, res: Response): unknown => res.json({ status: 200 }));

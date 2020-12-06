@@ -2,7 +2,7 @@
   "name": "@myrotvorets/express-async-middleware-wrapper",
   "version": "1.0.19",
   "description": "Wrapper for Express.js async middleware to handle rejected promises and synchronous exceptions",
-  "main": "dist/index.js",
+  "main": "dist/lib/index.js",
   "scripts": {
     "build": "tsc",
     "lint": "eslint .",
@@ -12,17 +12,18 @@
     "test": "jest"
   },
   "files": [
-    "dist/index.d.ts",
-    "dist/index.js",
-    "dist/index.js.map"
+    "dist/lib/index.d.ts",
+    "dist/lib/index.js",
+    "dist/lib/index.js.map"
   ],
-  "typings": "dist/index.d.ts",
+  "typings": "dist/lib/index.d.ts",
   "keywords": [],
   "author": "Myrotvorets <support@myrotvorets.center> (https://myrotvorets.center/)",
   "license": "MIT",
   "devDependencies": {
     "@myrotvorets/eslint-config-myrotvorets-ts": "^2.1.0",
     "@types/express": "^4.17.9",
+    "@types/express-serve-static-core": "^4.17.14",
     "@types/jest": "^26.0.16",
     "@types/supertest": "^2.0.10",
     "@typescript-eslint/eslint-plugin": "^4.9.0",

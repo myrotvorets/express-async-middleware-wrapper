@@ -4,7 +4,7 @@
         "module": "CommonJS",
         "outDir": "./dist",
         "sourceMap": true,
-        "rootDir": "./src",
+        "rootDirs": ["./lib", "./test"],
         "declaration": true,
         "strict": true,
         "noUnusedLocals": true,
