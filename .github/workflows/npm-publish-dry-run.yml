@@ -1,9 +1,8 @@
-name: Publish Package
+name: Publish Package (Dry Run)
 
 on:
   push:
-    tags:
-      - '*'
+    branches: [ master ]
 
 jobs:
   prepare:
@@ -46,7 +45,7 @@ jobs:
           name: package
 
       - name: Publish to NPM package registry
-        run: npm publish *.tgz
+        run: npm publish --dry-run *.tgz
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
@@ -66,6 +65,6 @@ jobs:
           name: package
 
       - name: Publish to GitHub package registry
-        run: npm publish *.tgz
+        run: npm publish --dry-run *.tgz
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
