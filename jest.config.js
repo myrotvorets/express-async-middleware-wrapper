@@ -4,8 +4,7 @@ const ts_preset = require('ts-jest/jest-preset');
 module.exports = merge.recursive(ts_preset, {
     collectCoverage: true,
     collectCoverageFrom: [
-        'src/**/*.ts',
-        '!src/test/**',
+        'lib/**/*.ts',
     ],
     clearMocks: true,
     verbose: true,
