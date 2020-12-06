@@ -17,7 +17,14 @@
     "dist/lib/index.js.map"
   ],
   "typings": "dist/lib/index.d.ts",
-  "keywords": [],
+  "keywords": [
+    "express",
+    "async",
+    "await",
+    "middleware",
+    "handle rejected promises",
+    "express middleware"
+  ],
   "author": "Myrotvorets <support@myrotvorets.center> (https://myrotvorets.center/)",
   "license": "MIT",
   "devDependencies": {
@@ -34,6 +41,7 @@
     "eslint-plugin-sonarjs": "^0.5.0",
     "express": "^4.17.1",
     "jest": "^26.6.3",
+    "jest-sonar-reporter": "^2.0.0",
     "merge": "^2.1.0",
     "prettier": "^2.2.1",
     "supertest": "^6.0.1",
