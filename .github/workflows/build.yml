@@ -1,49 +1,50 @@
-name: Build and Test CI
+name: Build and Test
 
 on:
   push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+    branches:
+      - '**'
+  workflow_dispatch:
 
 jobs:
   build:
-    if: "!contains(github.event.head_commit.message, '[ci skip]')"
     runs-on: ubuntu-latest
+    if: ${{ !contains(github.event.head_commit.message, '[ci skip]') || github.event_name == 'workflow_dispatch' }}
     strategy:
       matrix:
-        node_version: ['12', '14']
-
+        node:
+          - '12'
+          - '14'
+    name: Build and test (Node ${{ matrix.node }})
     steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
+      - name: Check out the code
+        uses: actions/checkout@v2
 
-      - name: Setup Node.js environment
+      - name: Set up Node.js environment
         uses: actions/setup-node@v2.1.5
         with:
-          node-version: ${{ matrix.node_version }}
+          node-version: ${{ matrix.node }}
 
-      - run: npm cit
-
-      - name: Retrieve information from package.json
-        uses: myrotvorets/info-from-package-json-action@1.0.3
-        id: ver
-
-      - name: Fix paths in test-report.xml
-        run: sed -i "s@$(pwd)@/github/workspace@g" test-report.xml
-        if: ${{ matrix.node_version == '12' }}
-
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@master
+      - name: Cache Node modules
+        uses: actions/cache@v2.1.4
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          cache-name: cache-node-modules
         with:
-          args: >
-            -Dsonar.projectName=${{ steps.ver.outputs.packageName }}
-            -Dsonar.projectVersion=${{ steps.ver.outputs.packageVersion }}
-            -Dsonar.links.homepage=${{ steps.ver.outputs.packageHomepage }}
-            -Dsonar.links.issue=${{ steps.ver.outputs.packageBugsUrl }}
-            -Dsonar.links.scm=${{ steps.ver.outputs.packageScmUrl }}
-        if: ${{ matrix.node_version == '12' }}
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node }}-
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+
+      - name: Install dependencies
+        run: npm ci --ignore-scripts
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Run postinstall scripts
+        run: npm rebuild && npm run prepare --if-present
+
+      - name: Run tests
+        run: npm test
+        env:
+          COLLECT_COVERAGE: "0"
