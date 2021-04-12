@@ -49,7 +49,7 @@ jobs:
           COLLECT_COVERAGE: "1"
 
       - name: Retrieve information from package.json
-        uses: myrotvorets/info-from-package-json-action@1.0.2
+        uses: myrotvorets/info-from-package-json-action@1.0.3
         id: ver
 
       - name: Fix paths in test-report.xml
