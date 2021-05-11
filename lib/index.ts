@@ -13,7 +13,7 @@ export default function asyncWrapperMiddleware<
     P = core.ParamsDictionary,
     ResBody = any,
     ReqBody = any,
-    ReqQuery = core.Query
+    ReqQuery = core.Query,
 >(
     fn: RequestHandler<P, ResBody, ReqBody, ReqQuery> | AsyncRequestHandler<P, ResBody, ReqBody, ReqQuery>,
 ): RequestHandler<P, ResBody, ReqBody, ReqQuery> {
