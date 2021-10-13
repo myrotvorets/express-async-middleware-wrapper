@@ -24,7 +24,7 @@ export default function asyncWrapperMiddleware<
             res: Response<ResBody>,
             next: NextFunction,
         ): void {
-            Promise.resolve(fn(req, res, next)).catch((e) => setImmediate(next, e));
+            Promise.resolve(fn(req, res, next)).catch((e: unknown) => setImmediate<unknown[]>(next, e));
         },
     };
 
