@@ -39,7 +39,6 @@
     "jest-github-actions-reporter": "^1.0.3",
     "jest-sonar-reporter": "^2.0.0",
     "merge": "^2.1.1",
-    "prettier": "^2.2.1",
     "supertest": "^6.1.3",
     "ts-jest": "^27.0.1",
     "ts-node": "^10.0.0",
