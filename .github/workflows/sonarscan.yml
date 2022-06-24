@@ -60,7 +60,7 @@ jobs:
           COLLECT_COVERAGE: "1"
 
       - name: Retrieve information from package.json
-        uses: myrotvorets/info-from-package-json-action@707c49e5757ac29e396e94b18e43b85a53ec0b3b # renovate: tag=1.1.0
+        uses: myrotvorets/info-from-package-json-action@ac520d803506a6f636b89cf1c1b63dd6c2d7d053 # tag=1.1.1
         id: ver
 
       - name: Fix paths in test-report.xml
