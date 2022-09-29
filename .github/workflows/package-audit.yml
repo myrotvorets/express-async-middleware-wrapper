@@ -10,63 +10,22 @@ on:
       - .github/workflows/package-audit.yml
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   audit-npm:
     name: NPM Audit
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node_version: ["14"]
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # tag=v3.0.2
-
-      - name: Setup Node.js environment
-        uses: actions/setup-node@969bd2663942d722d85b6a8626225850c2f7be4b # tag=v3.5.0
-        with:
-          node-version: ${{ matrix.node_version }}
-
-      - name: Run audit
-        run: npm audit --production
+      - name: Audit with NPM
+        uses: myrotvorets/composite-actions/node-package-audit@master
 
   audit-retire:
     name: RetireJS Check
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node_version: ["14"]
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # tag=v3.0.2
-        with:
-          submodules: true
-
-      - name: Setup Node.js environment
-        uses: actions/setup-node@969bd2663942d722d85b6a8626225850c2f7be4b # tag=v3.5.0
-        with:
-          node-version: ${{ matrix.node_version }}
-          registry-url: https://npm.pkg.github.com
-
-      - name: Cache node modules
-        uses: actions/cache@fd5de65bc895cf536527842281bea11763fefd77 # tag=v3.0.8
-        env:
-          cache-name: cache-node-modules
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node_version }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node_version }}-
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-
-      - name: Install dependencies
-        run: npm ci --ignore-scripts
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Install retire.js
-        run: npm i -g retire
-
-      - name: Run audit
-        run: retire -n
+      - name: Audit with Retire.js
+        uses: myrotvorets/composite-actions/node-package-audit-retirejs@master
