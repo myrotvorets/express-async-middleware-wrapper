@@ -1,22 +1,35 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type { NextFunction, Request, RequestHandler, Response } from 'express';
-// eslint-disable-next-line import/no-unresolved
-import type core from 'express-serve-static-core';
+import type { ParamsDictionary, Query } from 'express-serve-static-core';
 
-type RequestHandlerParams<R, Res, Req, Query> = Parameters<RequestHandler<R, Res, Req, Query>>;
+type RequestHandlerParams<R, Res, Req, Query, Locals extends Record<string, any>> = Parameters<
+    RequestHandler<R, Res, Req, Query, Locals>
+>;
 
-export type AsyncRequestHandler<P = core.ParamsDictionary, ResBody = any, ReqBody = any, ReqQuery = core.Query> = (
-    ...args: RequestHandlerParams<P, ResBody, ReqBody, ReqQuery>
-) => Promise<void>;
+export type AsyncRequestHandler<
+    P = ParamsDictionary,
+    ResBody = any,
+    ReqBody = any,
+    ReqQuery = Query,
+    Locals extends Record<string, any> = Record<string, any>,
+> = (...args: RequestHandlerParams<P, ResBody, ReqBody, ReqQuery, Locals>) => Promise<void>;
 
-export function asyncWrapperMiddleware<P = core.ParamsDictionary, ResBody = any, ReqBody = any, ReqQuery = core.Query>(
-    fn: RequestHandler<P, ResBody, ReqBody, ReqQuery> | AsyncRequestHandler<P, ResBody, ReqBody, ReqQuery>,
-): RequestHandler<P, ResBody, ReqBody, ReqQuery> {
+export function asyncWrapperMiddleware<
+    P = ParamsDictionary,
+    ResBody = any,
+    ReqBody = any,
+    ReqQuery = Query,
+    Locals extends Record<string, any> = Record<string, any>,
+>(
+    fn:
+        | RequestHandler<P, ResBody, ReqBody, ReqQuery, Locals>
+        | AsyncRequestHandler<P, ResBody, ReqBody, ReqQuery, Locals>,
+): RequestHandler<P, ResBody, ReqBody, ReqQuery, Locals> {
     const name = `async wrapper for ${fn.name}`;
     const r = {
         [name]: function (
-            req: Request<P, ResBody, ReqBody, ReqQuery>,
-            res: Response<ResBody>,
+            req: Request<P, ResBody, ReqBody, ReqQuery, Locals>,
+            res: Response<ResBody, Locals>,
             next: NextFunction,
         ): void {
             Promise.resolve(fn(req, res, next)).catch((e: unknown) => setImmediate<unknown[]>(next, e));
