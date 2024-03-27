@@ -6,10 +6,6 @@ on:
       - released
   workflow_dispatch:
     inputs:
-      npm:
-        default: "yes"
-        description: Publish to NPM?
-        required: true
       gpr:
         default: "yes"
         description: Publish to GPR?
@@ -38,12 +34,8 @@ jobs:
     strategy:
       matrix:
         registry:
-          - npm
           - gpr
         include:
-          - registry: npm
-            secret: NPM_TOKEN
-            registry_url: https://registry.npmjs.org/
           - registry: gpr
             secret: GITHUB_TOKEN
             registry_url: https://npm.pkg.github.com/
