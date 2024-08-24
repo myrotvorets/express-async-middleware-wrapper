@@ -25,9 +25,7 @@ function normalHandler(req: Request, res: Response): Promise<void> {
 }
 
 function rejectingHandler(): Promise<void> {
-    return new Promise<void>((resolve, reject): void => {
-        reject(new Error('Rejecting promise'));
-    });
+    return Promise.reject(new Error('Rejecting promise'));
 }
 
 function throwingHandler(): Promise<void> {
