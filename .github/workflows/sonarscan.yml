@@ -12,20 +12,40 @@ on:
 permissions:
   contents: read
 
-env:
-  SONARSCANNER: "true"
-  COLLECT_COVERAGE: "1"
-
 jobs:
   build:
     name: SonarCloud Scan
     runs-on: ubuntu-latest
-    if: |
-      github.event_name == 'workflow_dispatch' ||
-      github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.event.pull_request.base.repo.full_name && github.event.sender.login != 'dependabot[bot]' ||
-      github.event_name == 'push' && !contains(github.event.head_commit.message, '[ci skip]')
+    permissions:
+      contents: read
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.event.pull_request.base.repo.full_name
     steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@5c7944e73c4c2a096b17a9cb74d65b6c2bbafbde # v2.9.1
+        with:
+          disable-sudo: true
+          egress-policy: block
+          allowed-endpoints: >
+            api.github.com:443
+            github.com:443
+            npm.pkg.github.com:443
+            objects.githubusercontent.com:443
+            pipelinesghubeus23.actions.githubusercontent.com:443
+            pkg-npm.githubusercontent.com:443
+            registry.npmjs.org:443
+            api.sonarcloud.io:443
+            analysis-sensorcache-eu-central-1-prod.s3.amazonaws.com:443
+            sc-cleancode-sensorcache-eu-central-1-prod.s3.amazonaws.com:443
+            scanner.sonarcloud.io:443
+            sonarcloud.io:443
+
+      - name: Check out the source code
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+        with:
+          fetch-depth: 0
+
       - name: Run SonarCloud analysis
-        uses: myrotvorets/composite-actions/node-sonarscan@master
+        uses: myrotvorets/composite-actions/node-sonarscan@931ae3fec4810f7d263d28f6cf12159080b76208
         with:
           sonar-token: ${{ secrets.SONAR_TOKEN }}
+          test-script: 'test:coverage'
