@@ -1,23 +1,24 @@
+import { describe, it } from 'node:test';
 import request from 'supertest';
-import express, { NextFunction, Request, RequestHandler, Response } from 'express';
+import express, { Application, NextFunction, Request, RequestHandler, Response } from 'express';
 import wrapper, { AsyncRequestHandler } from '../lib';
 
-function buildServer(fn: RequestHandler | AsyncRequestHandler): express.Application {
+function buildServer(fn: RequestHandler | AsyncRequestHandler): Application {
     const server = express();
     server.use(wrapper(fn));
     server.use((req: Request, res: Response): unknown => res.json({ status: 200 }));
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    server.use((err: Error | null, req: Request, res: Response, next: NextFunction): unknown =>
+    server.use((err: Error | null, _req: Request, res: Response, next: NextFunction): unknown =>
         res.status(500).json({ name: err?.name, message: err?.message }),
     );
     return server;
 }
 
-function syncHandler(req: Request, res: Response): void {
+function syncHandler(_req: Request, res: Response): void {
     res.status(204).send();
 }
 
-function normalHandler(req: Request, res: Response): Promise<void> {
+function normalHandler(_req: Request, res: Response): Promise<void> {
     return new Promise<void>((resolve): void => {
         res.status(200).json({});
         resolve();
@@ -34,28 +35,28 @@ function throwingHandler(): Promise<void> {
     });
 }
 
-describe('Middleware', (): void => {
-    it('should be able to handle syncHandler()', (): Promise<unknown> => {
+void describe('Middleware', async () => {
+    await it('should be able to handle syncHandler()', async () => {
         const server = buildServer(syncHandler);
-        return request(server).get('/').expect(204);
+        await request(server).get('/').expect(204);
     });
 
-    it('should be able to handle normalHandler()', (): Promise<unknown> => {
+    await it('should be able to handle normalHandler()', async () => {
         const server = buildServer(normalHandler);
-        return request(server).get('/').expect(200);
+        await request(server).get('/').expect(200);
     });
 
-    it('should be able to handle rejectingHandler()', (): Promise<unknown> => {
+    await it('should be able to handle rejectingHandler()', async () => {
         const server = buildServer(rejectingHandler);
-        return request(server)
+        await request(server)
             .get('/')
             .expect(500)
             .expect(/Rejecting promise/u);
     });
 
-    it('should be able to handle throwingHandler()', (): Promise<unknown> => {
+    await it('should be able to handle throwingHandler()', async () => {
         const server = buildServer(throwingHandler);
-        return request(server)
+        await request(server)
             .get('/')
             .expect(500)
             .expect(/All fired up/u);

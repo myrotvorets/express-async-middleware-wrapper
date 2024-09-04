@@ -36,7 +36,7 @@ export function asyncWrapperMiddleware<
         },
     };
 
-    return r[name];
+    return r[name]!;
 }
 
 export default asyncWrapperMiddleware;
