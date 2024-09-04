@@ -1,13 +1,13 @@
 {
   "parserOptions": {
-    "ecmaVersion": 2019,
+    "ecmaVersion": 2022,
     "project": ["./tsconfig.json"]
   },
+  "reportUnusedDisableDirectives": true,
   "extends": [
     "@myrotvorets/myrotvorets-ts"
   ],
   "env": {
-    "node": true,
-    "jest": true
+    "node": true
   }
 }
