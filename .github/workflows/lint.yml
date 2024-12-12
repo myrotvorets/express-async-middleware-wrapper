@@ -36,7 +36,7 @@ jobs:
             registry.npmjs.org:443
 
       - name: Run code style check
-        uses: myrotvorets/composite-actions/node-run-script@cecb96664cb67f063d11aedb7456874eda7e9028
+        uses: myrotvorets/composite-actions/node-run-script@b2ee801d40bc37c1303783f99e1fce35fc33bd52
         with:
           script: lint
 
@@ -59,6 +59,6 @@ jobs:
             registry.npmjs.org:443
 
       - name: Run type check
-        uses: myrotvorets/composite-actions/node-run-script@cecb96664cb67f063d11aedb7456874eda7e9028
+        uses: myrotvorets/composite-actions/node-run-script@b2ee801d40bc37c1303783f99e1fce35fc33bd52
         with:
           script: typecheck

@@ -27,6 +27,7 @@ jobs:
           egress-policy: block
           allowed-endpoints: >
             api.github.com:443
+            binaries.sonarsource.com:443
             github.com:443
             npm.pkg.github.com:443
             objects.githubusercontent.com:443
@@ -45,7 +46,7 @@ jobs:
           fetch-depth: 0
 
       - name: Run SonarCloud analysis
-        uses: myrotvorets/composite-actions/node-sonarscan@cecb96664cb67f063d11aedb7456874eda7e9028
+        uses: myrotvorets/composite-actions/node-sonarscan@b2ee801d40bc37c1303783f99e1fce35fc33bd52
         with:
           sonar-token: ${{ secrets.SONAR_TOKEN }}
           test-script: 'test:coverage'
