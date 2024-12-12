@@ -28,7 +28,7 @@ jobs:
             registry.npmjs.org:443
 
       - name: Build and test
-        uses: myrotvorets/composite-actions/build-test-nodejs@cecb96664cb67f063d11aedb7456874eda7e9028
+        uses: myrotvorets/composite-actions/build-test-nodejs@b2ee801d40bc37c1303783f99e1fce35fc33bd52
 
   release:
     name: Prepare the release
