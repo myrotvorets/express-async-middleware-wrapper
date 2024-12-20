@@ -1,6 +1,6 @@
 {
   "name": "@myrotvorets/express-async-middleware-wrapper",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "description": "Wrapper for Express.js async middleware to handle rejected promises and synchronous exceptions",
   "main": "dist/lib/index.js",
   "scripts": {
