@@ -42,9 +42,6 @@
     "ts-node": "^10.9.2",
     "typescript": "^5.5.4"
   },
-  "peerDependencies": {
-    "express": "^4.0.0"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/myrotvorets/express-async-middleware-wrapper.git"
