@@ -35,6 +35,8 @@ jobs:
             pkg-npm.githubusercontent.com:443
             registry.npmjs.org:443
             api.sonarcloud.io:443
+            analysis-sensorcache-eu-central-1-prod.s3.amazonaws.com:443
+            sc-cleancode-sensorcache-eu-central-1-prod.s3.amazonaws.com:443
             scanner.sonarcloud.io:443
             sonarcloud.io:443
 
