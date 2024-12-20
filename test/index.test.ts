@@ -1,17 +1,21 @@
 import { describe, it } from 'node:test';
+import { RequestListener } from 'node:http';
 import request from 'supertest';
-import express, { Application, NextFunction, Request, RequestHandler, Response } from 'express';
-import wrapper, { AsyncRequestHandler } from '../lib';
+import express, { type NextFunction, type Request, type RequestHandler, type Response } from 'express';
+import { asyncWrapperMiddleware } from '../lib';
 
-function buildServer(fn: RequestHandler | AsyncRequestHandler): Application {
+function buildServer(fn: RequestHandler): RequestListener {
     const server = express();
-    server.use(wrapper(fn));
-    server.use((req: Request, res: Response): unknown => res.json({ status: 200 }));
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    server.use((err: Error | null, _req: Request, res: Response, next: NextFunction): unknown =>
-        res.status(500).json({ name: err?.name, message: err?.message }),
-    );
-    return server;
+    server.use(asyncWrapperMiddleware(fn));
+    server.use((_req: Request, res: Response) => {
+        res.json({ status: 200 });
+    });
+
+    server.use((err: Error | null, _req: Request, res: Response, _next: NextFunction) => {
+        res.status(500).json({ name: err?.name, message: err?.message });
+    });
+
+    return server as RequestListener;
 }
 
 function syncHandler(_req: Request, res: Response): void {
