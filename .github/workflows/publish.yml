@@ -35,7 +35,7 @@ jobs:
             registry.npmjs.org:443
 
       - name: Prepare source
-        uses: myrotvorets/composite-actions/node-prepublish@f316ce94b47174d25b0a847285b45f7d2faea849
+        uses: myrotvorets/composite-actions/node-prepublish@2c5245a52d779b437f164a63bad7d5913fd9e02f
 
   publish:
     name: Publish package (${{ matrix.registry }})
@@ -71,7 +71,7 @@ jobs:
             npm.pkg.github.com:443
 
       - name: Publish package
-        uses: myrotvorets/composite-actions/node-publish@f316ce94b47174d25b0a847285b45f7d2faea849
+        uses: myrotvorets/composite-actions/node-publish@2c5245a52d779b437f164a63bad7d5913fd9e02f
         with:
           node-auth-token: ${{ secrets[matrix.secret] }}
           registry-url: ${{ matrix.registry_url }}
