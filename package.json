@@ -35,7 +35,7 @@
     "@types/supertest": "^6.0.2",
     "c8": "^10.1.2",
     "eslint-formatter-gha": "^1.5.1",
-    "express": "^4.21.2",
+    "express": "^5.0.0",
     "node-reporter-gha": "^2.0.4",
     "node-reporter-sonarqube": "^1.0.1",
     "supertest": "^7.0.0",
