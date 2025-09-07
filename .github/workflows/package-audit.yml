@@ -30,4 +30,4 @@ jobs:
             registry.npmjs.org:443
 
       - name: Audit with NPM
-        uses: myrotvorets/composite-actions/node-package-audit@369dc3aeb93e19b315d8a658a6a5d347eac45218
+        uses: myrotvorets/composite-actions/node-package-audit@c18cf44d94c308313f0f78d2dcfc7a92967dff2b
