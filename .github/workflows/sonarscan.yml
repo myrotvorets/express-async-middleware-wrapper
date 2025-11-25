@@ -40,11 +40,6 @@ jobs:
             scanner.sonarcloud.io:443
             sonarcloud.io:443
 
-      - name: Check out the source code
-        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
-        with:
-          fetch-depth: 0
-
       - name: Run SonarCloud analysis
         uses: myrotvorets/composite-actions/node-sonarscan@65a2ad38ee88c348c96631c7afa0f940975d020a
         with:
