@@ -46,7 +46,7 @@ jobs:
           fetch-depth: 0
 
       - name: Run SonarCloud analysis
-        uses: myrotvorets/composite-actions/node-sonarscan@7730a4115961fd7f7265421bfb50f752f87b98e8
+        uses: myrotvorets/composite-actions/node-sonarscan@96017f90942616677d9fdad3cf29cefcec02d795
         with:
           sonar-token: ${{ secrets.SONAR_TOKEN }}
           test-script: 'test:coverage'
