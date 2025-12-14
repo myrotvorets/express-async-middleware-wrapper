@@ -41,7 +41,7 @@ jobs:
             sonarcloud.io:443
 
       - name: Run SonarCloud analysis
-        uses: myrotvorets/composite-actions/node-sonarscan@96017f90942616677d9fdad3cf29cefcec02d795
+        uses: myrotvorets/composite-actions/node-sonarscan@3979e6120a77babddec6e34f9008f4ed8d611c61
         with:
           sonar-token: ${{ secrets.SONAR_TOKEN }}
           test-script: 'test:coverage'
