@@ -33,7 +33,7 @@
     "@types/express": "^5.0.0",
     "@types/express-serve-static-core": "^5.0.0",
     "@types/supertest": "^6.0.2",
-    "c8": "^10.1.2",
+    "c8": "^11.0.0",
     "eslint-formatter-gha": "^2.0.0",
     "express": "^5.0.0",
     "node-reporter-gha": "^2.0.4",
