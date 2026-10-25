@@ -29,7 +29,7 @@
   "author": "Myrotvorets <support@myrotvorets.center> (https://myrotvorets.center/)",
   "license": "MIT",
   "devDependencies": {
-    "@myrotvorets/eslint-config-myrotvorets-ts": "^3.1.1",
+    "@myrotvorets/eslint-config-myrotvorets-ts": "^4.0.0",
     "@types/express": "^5.0.6",
     "@types/express-serve-static-core": "^5.1.1",
     "@types/supertest": "^7.2.0",
